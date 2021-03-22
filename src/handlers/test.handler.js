@@ -1,6 +1,3 @@
-const testHandler = (req, res) => res.status(200).json({
-  user: req.user,
-  message: 'Verified',
-});
+const testHandler = (req, res) => res.status(200).json({ message: 'Verified' });
 
 module.exports = { testHandler };
