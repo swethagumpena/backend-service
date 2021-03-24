@@ -4,7 +4,7 @@ const authenticateJwt = (req, res, next) => {
   const authHeader = req.headers.authorization;
   if (authHeader) {
     const jwtToken = authHeader.split(' ')[1];
-    const isVerified = authService.verifyMockToken(jwtToken);
+    const isVerified = authService.verifyToken(jwtToken);
     if (isVerified) next();
     else res.status(401).send();
   } else {
