@@ -2,8 +2,8 @@ const express = require('express');
 const dotenv = require('dotenv');
 const { healthRouter, testRouter } = require('./src/routes');
 
-dotenv.config();
 const app = express();
+dotenv.config();
 
 const port = process.env.PORT || 3000;
 
