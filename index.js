@@ -1,9 +1,18 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const appRoot = require('app-root-path');
+const path = require('path');
 const { healthRouter, testRouter } = require('./src/routes');
 
 const app = express();
-dotenv.config();
+
+if (process.env.NODE_APP_ENV === 'local') {
+  // const pathRoot = `${appRoot}/`;
+  // console.log("HEYYYYY", appRoot.path+`${process.env.NODE_APP_ENV}.env`);
+  dotenv.config({
+    path: path.resolve(appRoot.path, `${process.env.NODE_APP_ENV}.env`),
+  });
+} else dotenv.config();
 
 const port = process.env.PORT || 3000;
 
