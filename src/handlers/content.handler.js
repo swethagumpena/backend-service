@@ -21,7 +21,7 @@ const getContentTypesHandler = async (req, res) => {
 };
 
 // add new field based on contentType
-const addFieldsHandler = async (req, res) => {
+const addFieldHandler = async (req, res) => {
   try {
     const addedFieldContent = await contentService.addField(req.params.typeName, req.body.field);
     res.status(200).send({ data: addedFieldContent });
@@ -34,9 +34,37 @@ const addFieldsHandler = async (req, res) => {
   }
 };
 
+const updateFieldHandler = async (req, res) => {
+  try {
+    const updatedField = await contentService.updateField(
+      req.params.typeName, req.body.oldField, req.body.newField,
+    );
+    res.status(200).send({ data: updatedField });
+  } catch (error) {
+    if (error.message === 'Content type not found') {
+      res.status(400).json({ message: error.message });
+    } else {
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  }
+};
+
+// const deleteFieldsHandler = async (req, res) => {
+//   try {
+//     const deletedContent = await contentService.deleteField(req.params.typeName, req.body.field);
+//     res.status(200).send({ data: updatedContent });
+//   } catch (error) {
+//     if (error.message === 'Content type not found') {
+//       res.status(400).json({ message: error.message });
+//     } else {
+//       res.status(500).json({ message: 'Internal server error' });
+//     }
+//   }
+// };
+
 module.exports = {
   createContentHandler,
   getContentTypesHandler,
-  addFieldsHandler,
-//   updateFieldsHandler,
+  addFieldHandler,
+  updateFieldHandler,
 };
