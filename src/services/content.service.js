@@ -59,9 +59,28 @@ const updateField = async (typeName, oldField, newField) => {
   return updatedContent;
 };
 
+const deleteField = async (typeName, field) => {
+  const existingFields = await Content.findOne(
+    {
+      where: { typeName },
+    },
+  );
+  if (!existingFields) { throw new Error('Content type not found'); }
+  const fieldsArr = existingFields.dataValues.fields;
+
+  const updatedFieldsArr = fieldsArr.filter((item) => item !== field);
+  const updatedContent = await Content.update({ fields: updatedFieldsArr },
+    {
+      where: { typeName },
+      returning: true,
+    });
+  return updatedContent;
+};
+
 module.exports = {
   createContent,
   fetchContentTypes,
   addField,
   updateField,
+  deleteField,
 };

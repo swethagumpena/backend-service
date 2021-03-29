@@ -49,22 +49,23 @@ const updateFieldHandler = async (req, res) => {
   }
 };
 
-// const deleteFieldsHandler = async (req, res) => {
-//   try {
-//     const deletedContent = await contentService.deleteField(req.params.typeName, req.body.field);
-//     res.status(200).send({ data: updatedContent });
-//   } catch (error) {
-//     if (error.message === 'Content type not found') {
-//       res.status(400).json({ message: error.message });
-//     } else {
-//       res.status(500).json({ message: 'Internal server error' });
-//     }
-//   }
-// };
+const deleteFieldHandler = async (req, res) => {
+  try {
+    const deletedField = await contentService.deleteField(req.params.typeName, req.body.field);
+    res.status(200).send({ data: deletedField });
+  } catch (error) {
+    if (error.message === 'Content type not found') {
+      res.status(400).json({ message: error.message });
+    } else {
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  }
+};
 
 module.exports = {
   createContentHandler,
   getContentTypesHandler,
   addFieldHandler,
   updateFieldHandler,
+  deleteFieldHandler,
 };
