@@ -2,9 +2,12 @@ const express = require('express');
 const dotenv = require('dotenv');
 const appRoot = require('app-root-path');
 const path = require('path');
+const cors = require('cors');
 const { healthRouter, testRouter } = require('./src/routes');
 
 const app = express();
+app.use(express.json());
+app.use(cors());
 
 if (process.env.NODE_APP_ENV === 'local') {
   // const pathRoot = `${appRoot}/`;
@@ -19,6 +22,6 @@ const port = process.env.PORT || 3000;
 app.use('/health', healthRouter);
 app.use('/test', testRouter);
 
-app.listen(3000, () => {
+app.listen(port, () => {
   console.log(`Server is up at ${port}`);
 });
