@@ -1,7 +1,8 @@
 const express = require('express');
 const {
   createContentHandler,
-  getContentTypesHandler,
+  getContentHandler,
+  getfieldsHandler,
   addFieldHandler,
   updateFieldHandler,
   deleteFieldHandler,
@@ -11,7 +12,8 @@ const { authenticateJwt } = require('../middlewares/auth.middleware');
 const contentRouter = express.Router();
 
 contentRouter.post('/', authenticateJwt, createContentHandler);
-contentRouter.get('/', authenticateJwt, getContentTypesHandler);
+contentRouter.get('/', authenticateJwt, getContentHandler);
+contentRouter.get('/:typeName', authenticateJwt, getfieldsHandler);
 contentRouter.post('/:typeName', authenticateJwt, addFieldHandler);
 contentRouter.put('/:typeName', authenticateJwt, updateFieldHandler);
 contentRouter.delete('/:typeName', authenticateJwt, deleteFieldHandler);

@@ -11,10 +11,10 @@ const createContentHandler = async (req, res) => {
 };
 
 // get all typeNames
-const getContentTypesHandler = async (req, res) => {
+const getContentHandler = async (req, res) => {
   try {
-    const contentTypesList = await contentService.fetchContentTypes();
-    res.status(200).send({ data: contentTypesList });
+    const contentList = await contentService.fetchContent();
+    res.status(200).send({ data: contentList });
   } catch (error) {
     res.status(500).json({ message: 'Internal server error' });
   }
@@ -33,6 +33,16 @@ const addFieldHandler = async (req, res) => {
     }
   }
 };
+
+const getfieldsHandler = (async (req, res) => {
+  const { typeName } = req.params;
+  try {
+    const data = await contentService.getFields(typeName);
+    res.status(200).json({ data });
+  } catch (err) {
+    res.status(500).send();
+  }
+});
 
 const updateFieldHandler = async (req, res) => {
   try {
@@ -64,7 +74,8 @@ const deleteFieldHandler = async (req, res) => {
 
 module.exports = {
   createContentHandler,
-  getContentTypesHandler,
+  getContentHandler,
+  getfieldsHandler,
   addFieldHandler,
   updateFieldHandler,
   deleteFieldHandler,

@@ -3,7 +3,9 @@ const dotenv = require('dotenv');
 const appRoot = require('app-root-path');
 const path = require('path');
 const cors = require('cors');
-const { healthRouter, testRouter, contentRouter } = require('./src/routes');
+const {
+  healthRouter, testRouter, contentRouter, instanceRouter,
+} = require('./src/routes');
 
 const app = express();
 app.use(express.json());
@@ -22,6 +24,7 @@ const port = process.env.PORT || 3000;
 app.use('/health', healthRouter);
 app.use('/test', testRouter);
 app.use('/content', contentRouter);
+app.use('/instance', instanceRouter);
 
 app.listen(port, () => {
   console.log(`Server is up at ${port}`);

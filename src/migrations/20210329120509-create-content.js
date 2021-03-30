@@ -13,9 +13,11 @@ module.exports = {
       },
       fields: {
         type: Sequelize.ARRAY(Sequelize.STRING),
+        defaultValue: [],
       },
       instances: {
         type: Sequelize.JSONB,
+        defaultValue: [],
       },
       createdAt: {
         allowNull: false,

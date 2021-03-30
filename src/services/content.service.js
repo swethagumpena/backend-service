@@ -8,14 +8,29 @@ const createContent = async (typeName) => {
   return createdContent;
 };
 
-const fetchContentTypes = async () => {
-  const contentTypes = await Content.findAll(
-    {
-      attributes: ['typeName'],
-      raw: true,
-    },
-  );
+// const fetchContentTypes = async () => {
+//   const contentTypes = await Content.findAll(
+//     {
+//       attributes: ['typeName'],
+//       raw: true,
+//     },
+//   );
+//   return contentTypes;
+// };
+
+const fetchContent = async () => {
+  const contentTypes = await Content.findAll();
   return contentTypes;
+};
+
+const getFields = async (typeName) => {
+  const fields = await Content.findOne({
+    attributes: ['fields'],
+    where: {
+      typeName,
+    },
+  });
+  return fields.fields;
 };
 
 const addField = async (typeName, field) => {
@@ -30,6 +45,7 @@ const addField = async (typeName, field) => {
     fieldsArr = [];
   }
   if (fieldsArr.includes(field)) { throw new Error('Field already exists'); }
+  console.log('lll', field);
   fieldsArr.push(field);
   const updatedContent = await Content.update({ fields: fieldsArr },
     {
@@ -79,7 +95,8 @@ const deleteField = async (typeName, field) => {
 
 module.exports = {
   createContent,
-  fetchContentTypes,
+  fetchContent,
+  getFields,
   addField,
   updateField,
   deleteField,
