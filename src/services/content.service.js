@@ -1,4 +1,3 @@
-// const { Op } = require('sequelize');
 const { Content } = require('../models');
 
 const createContent = async (typeName) => {
@@ -7,16 +6,6 @@ const createContent = async (typeName) => {
   });
   return createdContent;
 };
-
-// const fetchContentTypes = async () => {
-//   const contentTypes = await Content.findAll(
-//     {
-//       attributes: ['typeName'],
-//       raw: true,
-//     },
-//   );
-//   return contentTypes;
-// };
 
 const fetchContent = async () => {
   const contentTypes = await Content.findAll();
