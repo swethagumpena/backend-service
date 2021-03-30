@@ -7,7 +7,7 @@ const verifyToken = async (token) => {
     headers:
     { Authorization: `Bearer ${token}` },
   });
-  console.log('auth service middleware', response);
+  // console.log('auth service middleware', response);
   if (response) {
     return response.data;
   }

@@ -1,7 +1,7 @@
 // const authService = require('../services/auth.service');
 
 const testHandler = async (req, res) => {
-  console.log('test handler req', req);
+  // console.log('test handler req', req);
   try {
     // const loginUser = await authService.verifyToken(token);
     // console.log(loginUser);

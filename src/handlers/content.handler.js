@@ -6,7 +6,7 @@ const createContentHandler = async (req, res) => {
     const createdContent = await contentService.createContent(req.body.typeName);
     res.status(200).json({ data: createdContent });
   } catch (error) {
-    res.status(500).send();
+    res.status(500).json();
   }
 };
 
@@ -14,7 +14,7 @@ const createContentHandler = async (req, res) => {
 const getContentHandler = async (req, res) => {
   try {
     const contentList = await contentService.fetchContent();
-    res.status(200).send({ data: contentList });
+    res.status(200).json({ data: contentList });
   } catch (error) {
     res.status(500).json({ message: 'Internal server error' });
   }
@@ -24,7 +24,7 @@ const getContentHandler = async (req, res) => {
 const addFieldHandler = async (req, res) => {
   try {
     const addedFieldContent = await contentService.addField(req.params.typeName, req.body.field);
-    res.status(200).send({ data: addedFieldContent });
+    res.status(200).json({ data: addedFieldContent });
   } catch (error) {
     if (error.message === 'Content type not found' || error.message === 'Field already exists') {
       res.status(400).json({ message: error.message });
@@ -61,9 +61,10 @@ const updateFieldHandler = async (req, res) => {
 
 const deleteFieldHandler = async (req, res) => {
   try {
-    const deletedField = await contentService.deleteField(req.params.typeName, req.body.field);
+    const deletedField = await contentService.deleteField(req.params.typeName, req.body.oldField);
     res.status(200).send({ data: deletedField });
   } catch (error) {
+    console.log('del', error);
     if (error.message === 'Content type not found') {
       res.status(400).json({ message: error.message });
     } else {

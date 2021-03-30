@@ -7,7 +7,6 @@ const getInstances = async (typeName, newObj) => {
       typeName,
     },
   });
-  console.log('nnn', newObj);
   const newArray = [...existingInstances.instances, newObj];
   const newFields = await Content.update({
     instances: newArray,

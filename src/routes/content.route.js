@@ -16,6 +16,6 @@ contentRouter.get('/', authenticateJwt, getContentHandler);
 contentRouter.get('/:typeName', authenticateJwt, getfieldsHandler);
 contentRouter.post('/:typeName', authenticateJwt, addFieldHandler);
 contentRouter.put('/:typeName', authenticateJwt, updateFieldHandler);
-contentRouter.delete('/:typeName', authenticateJwt, deleteFieldHandler);
+contentRouter.put('/field/:typeName', authenticateJwt, deleteFieldHandler);
 
 module.exports = { contentRouter };

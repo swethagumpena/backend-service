@@ -45,7 +45,6 @@ const addField = async (typeName, field) => {
     fieldsArr = [];
   }
   if (fieldsArr.includes(field)) { throw new Error('Field already exists'); }
-  console.log('lll', field);
   fieldsArr.push(field);
   const updatedContent = await Content.update({ fields: fieldsArr },
     {
